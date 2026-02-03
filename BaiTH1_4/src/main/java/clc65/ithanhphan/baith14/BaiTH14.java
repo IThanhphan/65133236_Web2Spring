@@ -22,34 +22,7 @@ public class BaiTH14 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<meta charset='UTF-8'>");
-		out.println("<title>Tính BMI</title>");
-		out.println("<style>");
-		out.println("body { font-family: Arial; background-color: #f2f2f2; }");
-		out.println(".box { width: 400px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; }");
-		out.println("h2 { text-align: center; }");
-		out.println("input { width: 100%; padding: 8px; margin: 10px 0; }");
-		out.println("button { width: 100%; padding: 10px; background: #3498db; color: white; border: none; }");
-		out.println("</style>");
-		out.println("</head>");
-
-		out.println("<body>");
-		out.println("<div class='box'>");
-		out.println("<h2>TÍNH CHỈ SỐ BMI</h2>");
-		out.println("<form method='post' action='BMI'>");
-		out.println("Chiều cao (m): <input type='number' step='0.01' name='height' required>");
-		out.println("Cân nặng (kg): <input type='number' step='0.1' name='weight' required>");
-		out.println("<button type='submit'>Tính BMI</button>");
-		out.println("</form>");
-		out.println("</div>");
-		out.println("</body>");
-		out.println("</html>");
+		request.getRequestDispatcher("/bmi.html").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
