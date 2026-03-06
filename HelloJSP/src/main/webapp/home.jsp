@@ -14,5 +14,8 @@
 	<%=2+5 %>
 	<%="<br><b>Hôm nay tôi học JSP</b>" %>
 </center>
+<%
+	response.sendRedirect(arg0);
+%>
 </body>
 </html>
