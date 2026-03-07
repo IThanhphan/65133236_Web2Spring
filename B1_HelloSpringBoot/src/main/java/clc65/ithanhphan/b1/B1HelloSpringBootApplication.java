@@ -1,13 +1,13 @@
-package com.example.demo;
+package clc65.ithanhphan.b1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ViDuSpringBootApplication {
+public class B1HelloSpringBootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ViDuSpringBootApplication.class, args);
+		SpringApplication.run(B1HelloSpringBootApplication.class, args);
 	}
 
 }

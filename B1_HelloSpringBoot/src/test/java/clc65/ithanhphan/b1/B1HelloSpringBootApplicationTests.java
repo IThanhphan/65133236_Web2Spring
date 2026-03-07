@@ -1,10 +1,10 @@
-package com.example.demo;
+package clc65.ithanhphan.b1;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ViDuSpringBootApplicationTests {
+class B1HelloSpringBootApplicationTests {
 
 	@Test
 	void contextLoads() {
