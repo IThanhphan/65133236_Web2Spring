@@ -19,7 +19,7 @@
 		}
 		
 		/* HEADER */
-		
+
 		.header{
 		    height:80px;
 		    background:linear-gradient(90deg,#1f3c88,#3a7bd5);
@@ -78,7 +78,7 @@
 		}
 		
 		/* SIDEBAR */
-
+		
 		.sidebar{
 		    width:220px;
 		    background:#2c3e50;
@@ -134,47 +134,29 @@
 		    align-items:center;
 		}
 		
-		/* CV LAYOUT */
-
-		.cv-container{
-		    width:80%;
-		    background:white;
-		    display:flex;
-		    box-shadow:0 0 10px rgba(0,0,0,0.1);
+		.table-container{
+		    width:90%;
 		}
 		
-		.cv-left{
-		    width:35%;
-		    background:#f4f4f4;
-		    padding:25px;
+		.page-table{
+		    width:100%;
+		    border-collapse:collapse;
+		}
+		
+		.page-table th,
+		.page-table td{
+		    border:1px solid #999;
+		    padding:8px;
 		    text-align:center;
 		}
 		
-		.cv-right{
-		    width:65%;
-		    padding:30px;
+		.page-table th{
+		    background:#f2f2f2;
 		}
 		
-		.avatar{
-		    width:120px;
-		    height:120px;
-		    border-radius:50%;
-		    margin-bottom:15px;
-		}
-		
-		.cv-section{
-		    margin-top:20px;
-		    text-align:left;
-		}
-		
-		.cv-section h3{
-		    border-bottom:2px solid #333;
-		    padding-bottom:5px;
-		    margin-bottom:10px;
-		}
-		
-		.cv-section ul{
-		    padding-left:20px;
+		.page-table a{
+		    text-decoration:none;
+		    color:blue;
 		}
 		
 		/* FOOTER */
@@ -223,67 +205,31 @@
         <!-- CONTENT -->
 		<section class="content">
 		
-		    <div class="cv-container">
+		    <div class="table-container">
 		
-		        <div class="cv-left">
-		            <img src="avatar.jpg" class="avatar">
+		        <table class="page-table">
+		            <thead>
+		                <tr>
+		                    <th>Id</th>
+		                    <th>Pagename</th>
+		                    <th>ParentPageId</th>
+		                    <th colspan="3">Action</th>
+		                </tr>
+		            </thead>
 		
-		            <h2>Phan Sĩ Thành</h2>
-		            <p><b>Student ID:</b> 65133236</p>
-		            <p><b>Major:</b> Information Technology</p>
+		            <tbody>
 		
-		            <div class="cv-section">
-		                <h3>Contact</h3>
-		                <p>Email: thanhphan@email.com</p>
-		                <p>Phone: 0373430192</p>
-		                <p>Address: Nha Trang, Vietnam</p>
-		            </div>
+		                <tr th:each="p : ${lstPages}">
+		                    <td th:text="${p.id}"></td>
+		                    <td th:text="${p.pageName}"></td>
+		                    <td th:text="${p.parentPageId}"></td>
 		
-		            <div class="cv-section">
-		                <h3>Skills</h3>
-		                <ul>
-		                    <li>Java</li>
-		                    <li>JavaScript</li>
-		                    <li>SQL Server</li>
-		                    <li>HTML / CSS</li>
-		                    <li>ReactJS</li>
-		                </ul>
-		            </div>
-		        </div>
+		                    <td><a href="#">view</a></td>
+		                    <td><a href="#">delete</a></td>
+		                </tr>
 		
-		        <div class="cv-right">
-		
-		            <div class="cv-section">
-		                <h3>Profile</h3>
-		                <p>
-		                    Sinh viên ngành Công nghệ Thông tin tại Đại học Nha Trang,
-		                    yêu thích lập trình web và phát triển phần mềm.
-		                    Có kinh nghiệm với Java, JavaScript và cơ sở dữ liệu.
-		                </p>
-		            </div>
-		
-		            <div class="cv-section">
-		                <h3>Education</h3>
-		                <p><b>Nha Trang University</b></p>
-		                <p>Bachelor of Information Technology</p>
-		                <p>2023 - Present</p>
-		            </div>
-		
-		            <div class="cv-section">
-		                <h3>Projects</h3>
-		
-		                <p><b>Chat Application</b></p>
-		                <p>Flutter + Firebase realtime chat</p>
-		
-		                <p><b>Car Marketplace Website</b></p>
-		                <p>NodeJS + SQL Server backend</p>
-		
-		                <p><b>Image Processing Web</b></p>
-		                <p>FastAPI + OpenCV</p>
-		
-		            </div>
-		
-		        </div>
+		            </tbody>
+		        </table>
 		
 		    </div>
 		
