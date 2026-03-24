@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::body})">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+	    *{
+	    margin:0;
+	    padding:0;
+	    box-sizing:border-box;
+	    font-family: Arial, sans-serif;
+		}
+		
+		/* CV LAYOUT */
+
+		.cv-container{
+		    width:80%;
+		    background:white;
+		    display:flex;
+		    box-shadow:0 0 10px rgba(0,0,0,0.1);
+		}
+		
+		.cv-left{
+		    width:35%;
+		    background:#f4f4f4;
+		    padding:25px;
+		    text-align:center;
+		}
+		
+		.cv-right{
+		    width:65%;
+		    padding:30px;
+		}
+		
+		.avatar{
+		    width:120px;
+		    height:120px;
+		    border-radius:50%;
+		    margin-bottom:15px;
+		}
+		
+		.cv-section{
+		    margin-top:20px;
+		    text-align:left;
+		}
+		
+		.cv-section h3{
+		    border-bottom:2px solid #333;
+		    padding-bottom:5px;
+		    margin-bottom:10px;
+		}
+		
+		.cv-section ul{
+		    padding-left:20px;
+		}
+		
+    </style>
+</head>
+<body>
+<div class="cv-container">
+
+    <div class="cv-left">
+        <img src="avatar.jpg" class="avatar">
+
+        <h2>Phan Sĩ Thành</h2>
+        <p><b>Student ID:</b> 65133236</p>
+        <p><b>Major:</b> Information Technology</p>
+
+        <div class="cv-section">
+            <h3>Contact</h3>
+            <p>Email: thanhphan@email.com</p>
+            <p>Phone: 0373430192</p>
+            <p>Address: Nha Trang, Vietnam</p>
+        </div>
+
+        <div class="cv-section">
+            <h3>Skills</h3>
+            <ul>
+                <li>Java</li>
+                <li>JavaScript</li>
+                <li>SQL Server</li>
+                <li>HTML / CSS</li>
+                <li>ReactJS</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="cv-right">
+
+        <div class="cv-section">
+            <h3>Profile</h3>
+            <p>
+                Sinh viên ngành Công nghệ Thông tin tại Đại học Nha Trang,
+                yêu thích lập trình web và phát triển phần mềm.
+                Có kinh nghiệm với Java, JavaScript và cơ sở dữ liệu.
+            </p>
+        </div>
+
+        <div class="cv-section">
+            <h3>Education</h3>
+            <p><b>Nha Trang University</b></p>
+            <p>Bachelor of Information Technology</p>
+            <p>2023 - Present</p>
+        </div>
+
+        <div class="cv-section">
+            <h3>Projects</h3>
+
+            <p><b>Chat Application</b></p>
+            <p>Flutter + Firebase realtime chat</p>
+
+            <p><b>Car Marketplace Website</b></p>
+            <p>NodeJS + SQL Server backend</p>
+
+            <p><b>Image Processing Web</b></p>
+            <p>FastAPI + OpenCV</p>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

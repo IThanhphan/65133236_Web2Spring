@@ -1,0 +1,18 @@
+<table border="1">
+<tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Category</th>
+    <th>Action</th>
+</tr>
+
+<tr th:each="p : ${posts}">
+    <td th:text="${p.id}"></td>
+    <td th:text="${p.title}"></td>
+    <td th:text="${p.categoryId}"></td>
+    <td>
+        <a th:href="@{'/post/view/' + ${p.id}}">View</a>
+        <a th:href="@{'/post/delete/' + ${p.id}}">Delete</a>
+    </td>
+</tr>
+</table>

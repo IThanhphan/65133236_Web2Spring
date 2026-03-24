@@ -1,0 +1,18 @@
+<table border="1">
+<tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Parent</th>
+    <th>Action</th>
+</tr>
+
+<tr th:each="p : ${pages}">
+    <td th:text="${p.id}"></td>
+    <td th:text="${p.pageName}"></td>
+    <td th:text="${p.parentPageId}"></td>
+    <td>
+        <a th:href="@{'/page/view/' + ${p.id}}">View</a>
+        <a th:href="@{'/page/delete/' + ${p.id}}">Delete</a>
+    </td>
+</tr>
+</table>
