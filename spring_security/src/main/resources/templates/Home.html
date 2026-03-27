@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+	    *{
+	    margin:0;
+	    padding:0;
+	    box-sizing:border-box;
+	    font-family: Arial, sans-serif;
+		}
+		
+		.container{
+		    width:100%;
+		    height:100vh;
+		    display:flex;
+		    flex-direction:column;
+		}
+		
+		/* HEADER */
+		
+		.header{
+		    height:80px;
+		    background:linear-gradient(90deg,#1f3c88,#3a7bd5);
+		    color:white;
+		    display:flex;
+		    justify-content:space-between;
+		    align-items:center;
+		    padding:0 25px;
+		    box-shadow:0 2px 5px rgba(0,0,0,0.2);
+		}
+		
+		.logo{
+		    display:flex;
+		    align-items:center;
+		    gap:15px;
+		}
+		
+		.logo img{
+		    width:55px;
+		    height:55px;
+		    border-radius:50%;
+		    background:white;
+		    padding:4px;
+		}
+		
+		.logo div{
+		    display:flex;
+		    flex-direction:column;
+		}
+		
+		.logo div div:first-child{
+		    font-size:16px;
+		    font-weight:bold;
+		}
+		
+		.logo div div:last-child{
+		    font-size:13px;
+		    opacity:0.9;
+		}
+		
+		/* USER */
+		
+		.user{
+		    background:rgba(255,255,255,0.2);
+		    padding:8px 15px;
+		    border-radius:20px;
+		    font-weight:bold;
+		    font-size:14px;
+		}
+		
+		/* MAIN */
+		
+		.main{
+		    flex:1;
+		    display:flex;
+		}
+		
+				/* CV LAYOUT */
+
+		.cv-container{
+		    width:80%;
+		    background:white;
+		    display:flex;
+		    box-shadow:0 0 10px rgba(0,0,0,0.1);
+		}
+		
+		.cv-left{
+		    width:35%;
+		    background:#f4f4f4;
+		    padding:25px;
+		    text-align:center;
+		}
+		
+		.cv-right{
+		    width:65%;
+		    padding:30px;
+		}
+		
+		.avatar{
+		    width:120px;
+		    height:120px;
+		    border-radius:50%;
+		    margin-bottom:15px;
+		}
+		
+		.cv-section{
+		    margin-top:20px;
+		    text-align:left;
+		}
+		
+		.cv-section h3{
+		    border-bottom:2px solid #333;
+		    padding-bottom:5px;
+		    margin-bottom:10px;
+		}
+		
+		.cv-section ul{
+		    padding-left:20px;
+		}
+		
+		/* SIDEBAR */
+
+		.sidebar{
+		    width:220px;
+		    background:#2c3e50;
+		    color:white;
+		    border-right:2px solid #ddd;
+		}
+		
+		.sidebar ul{
+		    list-style:none;
+		}
+		
+		.sidebar li{
+		    border-bottom:1px solid rgba(255,255,255,0.1);
+		}
+		
+		.sidebar a{
+		    display:block;
+		    padding:12px 15px;
+		    text-decoration:none;
+		    color:white;
+		    font-size:14px;
+		    transition:0.3s;
+		}
+		
+		/* Title dashboard */
+		
+		.sidebar .title a{
+		    background:#1a252f;
+		    font-weight:bold;
+		    font-size:16px;
+		}
+		
+		/* Hover effect */
+		
+		.sidebar a:hover{
+		    background:#3498db;
+		    padding-left:22px;
+		}
+		
+		/* Active style */
+		
+		.sidebar a:active{
+		    background:#2980b9;
+		}
+		
+		/* CONTENT */
+		
+		.content{
+		    flex:1;
+		    border:1px solid #999;
+		    display:flex;
+		    justify-content:center;
+		    align-items:center;
+		}
+		
+		/* FOOTER */
+		
+		.footer{
+		    height:40px;
+		    border:1px solid #999;
+		    text-align:center;
+		    line-height:40px;
+		}
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <img src="/logoNtu.jpg" alt="logo">
+            <div>
+                <div>TRƯỜNG ĐẠI HỌC NHA TRANG</div>
+                <div>KHOA CÔNG NGHỆ THÔNG TIN</div>
+            </div>
+        </div>
+
+        <div class="user">
+            Phan Sĩ Thành
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- SIDEBAR -->
+		<aside class="sidebar">
+		    <ul>
+		        <li class="title"><a href="/">Dashboard</a></li>
+		        <li><a href="/page/all">Page - List</a></li>
+		        <li><a href="/page/new">Page - Addnew</a></li>
+		        <li><a href="/post/all">Post - List</a></li>
+		        <li><a href="/post/new">Post - Addnew</a></li>      
+		    </ul>
+		</aside>
+
+        <!-- CONTENT -->
+		<section class="content">
+		    <div class="cv-container">
+
+    <div class="cv-left">
+        <img src="avatar.jpg" class="avatar">
+
+        <h2>Phan Sĩ Thành</h2>
+        <p><b>Student ID:</b> 65133236</p>
+        <p><b>Major:</b> Information Technology</p>
+
+        <div class="cv-section">
+            <h3>Contact</h3>
+            <p>Email: thanhphan@email.com</p>
+            <p>Phone: 0373430192</p>
+            <p>Address: Nha Trang, Vietnam</p>
+        </div>
+
+        <div class="cv-section">
+            <h3>Skills</h3>
+            <ul>
+                <li>Java</li>
+                <li>JavaScript</li>
+                <li>SQL Server</li>
+                <li>HTML / CSS</li>
+                <li>ReactJS</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="cv-right">
+
+        <div class="cv-section">
+            <h3>Profile</h3>
+            <p>
+                Sinh viên ngành Công nghệ Thông tin tại Đại học Nha Trang,
+                yêu thích lập trình web và phát triển phần mềm.
+                Có kinh nghiệm với Java, JavaScript và cơ sở dữ liệu.
+            </p>
+        </div>
+
+        <div class="cv-section">
+            <h3>Education</h3>
+            <p><b>Nha Trang University</b></p>
+            <p>Bachelor of Information Technology</p>
+            <p>2023 - Present</p>
+        </div>
+
+        <div class="cv-section">
+            <h3>Projects</h3>
+
+            <p><b>Chat Application</b></p>
+            <p>Flutter + Firebase realtime chat</p>
+
+            <p><b>Car Marketplace Website</b></p>
+            <p>NodeJS + SQL Server backend</p>
+
+            <p><b>Image Processing Web</b></p>
+            <p>FastAPI + OpenCV</p>
+
+        </div>
+
+    </div>
+
+</div>
+		</section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        ©2025 by Phan Sĩ Thành – FIT.NTU
+    </footer>
+
+</div>
+
+</body>
+</html>

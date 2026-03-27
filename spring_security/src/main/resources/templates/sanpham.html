@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý sản phẩm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+        }
+
+        .container {
+            width: 95%;
+            margin: 20px auto;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        /* Button */
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-add {
+            background-color: #28a745;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .btn-edit {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+        }
+
+        /* Search */
+        .search-box {
+            margin-bottom: 15px;
+        }
+
+        .search-box input {
+            padding: 8px;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Quản lý sản phẩm</h2>
+
+    <!-- Search -->
+    <div class="search-box">
+        <input type="text" placeholder="Tìm kiếm sản phẩm...">
+    </div>
+
+    <!-- Add button -->
+    <button class="btn btn-add">+ Thêm sản phẩm</button>
+
+    <!-- Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Hình ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Thymeleaf loop -->
+            <tr th:each="sp : ${products}">
+                <td th:text="${sp.id}">1</td>
+                <td>
+                    <img th:src="@{${sp.imageUrl}}" alt="image">
+                </td>
+                <td th:text="${sp.name}">Sản phẩm A</td>
+                <td th:text="${sp.price}">100000</td>
+                <td th:text="${sp.quantity}">10</td>
+                <td>
+                    <button class="btn btn-edit">Sửa</button>
+                    <button class="btn btn-delete">Xóa</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
