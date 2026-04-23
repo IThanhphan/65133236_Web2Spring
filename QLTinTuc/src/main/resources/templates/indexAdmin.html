@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản Lý Tin Tức - Admin</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
+        .container { max-width: 1200px; margin: auto; }
+        h1 { text-align: center; color: #333; }
+        
+        .section { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        h2 { border-bottom: 2px solid #3498db; padding-bottom: 10px; color: #3498db; }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], textarea, select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        
+        button { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; color: white; transition: 0.3s; }
+        .btn-add { background-color: #2ecc71; }
+        .btn-edit { background-color: #f1c40f; margin-right: 5px; }
+        .btn-delete { background-color: #e74c3c; }
+        button:hover { opacity: 0.8; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 12px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Hệ Thống Quản Trị Tin Tức</h1>
+
+    <div class="section">
+        <h2>Danh Mục Loại Tin</h2>
+        <div class="form-group">
+            <input type="hidden" id="loaiId">
+            <input type="text" id="tenLoai" placeholder="Nhập tên loại tin...">
+            <button class="btn-add" onclick="saveLoai()" style="margin-top: 10px;">Lưu Loại Tin</button>
+        </div>
+        <table id="tableLoai">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Loại</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Bài Viết Tin Tức</h2>
+        <div class="form-group">
+            <input type="hidden" id="tinId">
+            <label>Tiêu đề:</label>
+            <input type="text" id="tieuDe">
+        </div>
+        <div class="form-group">
+            <label>Nội dung:</label>
+            <textarea id="noiDung" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Loại tin:</label>
+            <select id="selectLoai"></select>
+        </div>
+        <button class="btn-add" onclick="saveTinTuc()">Lưu Bài Viết</button>
+
+        <table id="tableTinTuc">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tiêu đề</th>
+                    <th>Ngày đăng</th>
+                    <th>Loại tin</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const API_URL = "http://localhost:8080/api/admin"; // Thay đổi port nếu cần
+
+    // --- XỬ LÝ LOẠI TIN TỨC ---
+    async function loadLoai() {
+        const res = await fetch(`${API_URL}/loai`);
+        const data = await res.json();
+        const tbody = document.querySelector("#tableLoai tbody");
+        const select = document.querySelector("#selectLoai");
+        
+        tbody.innerHTML = "";
+        select.innerHTML = "";
+        
+        data.forEach(item => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.tenLoai}</td>
+                    <td>
+                        <button class="btn-edit" onclick="editLoai(${item.id}, '${item.tenLoai}')">Sửa</button>
+                        <button class="btn-delete" onclick="deleteLoai(${item.id})">Xóa</button>
+                    </td>
+                </tr>`;
+            select.innerHTML += `<option value="${item.id}">${item.tenLoai}</option>`;
+        });
+    }
+
+    async function saveLoai() {
+        const id = document.getElementById("loaiId").value;
+        const tenLoai = document.getElementById("tenLoai").value;
+        const method = id ? "PUT" : "POST";
+        const url = id ? `${API_URL}/loai/${id}` : `${API_URL}/loai`;
+
+        await fetch(url, {
+            method: method,
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ tenLoai })
+        });
+        resetLoaiForm();
+        loadLoai();
+    }
+
+    async function deleteLoai(id) {
+        if(confirm("Xóa loại tin này?")) {
+            await fetch(`${API_URL}/loai/${id}`, { method: 'DELETE' });
+            loadLoai();
+        }
+    }
+
+    function editLoai(id, ten) {
+        document.getElementById("loaiId").value = id;
+        document.getElementById("tenLoai").value = ten;
+    }
+
+    function resetLoaiForm() {
+        document.getElementById("loaiId").value = "";
+        document.getElementById("tenLoai").value = "";
+    }
+
+    // --- XỬ LÝ TIN TỨC ---
+    async function loadTinTuc() {
+        const res = await fetch(`${API_URL}/tintuc`);
+        const data = await res.json();
+        const tbody = document.querySelector("#tableTinTuc tbody");
+        tbody.innerHTML = "";
+        data.forEach(item => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.tieuDe}</td>
+                    <td>${new Date(item.ngayDang).toLocaleString()}</td>
+                    <td>${item.loaiTinTuc ? item.loaiTinTuc.tenLoai : 'N/A'}</td>
+                    <td>
+                        <button class="btn-edit" onclick="editTinTuc(${item.id})">Sửa</button>
+                        <button class="btn-delete" onclick="deleteTinTuc(${item.id})">Xóa</button>
+                    </td>
+                </tr>`;
+        });
+    }
+
+    async function saveTinTuc() {
+        const id = document.getElementById("tinId").value;
+        const body = {
+            tieuDe: document.getElementById("tieuDe").value,
+            noiDung: document.getElementById("noiDung").value,
+            loaiTinTuc: { id: document.getElementById("selectLoai").value }
+        };
+        
+        const method = id ? "PUT" : "POST";
+        const url = id ? `${API_URL}/tintuc/${id}` : `${API_URL}/tintuc`;
+
+        await fetch(url, {
+            method: method,
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body)
+        });
+        resetTinForm();
+        loadTinTuc();
+    }
+
+    async function deleteTinTuc(id) {
+        if(confirm("Xóa bài viết này?")) {
+            await fetch(`${API_URL}/tintuc/${id}`, { method: 'DELETE' });
+            loadTinTuc();
+        }
+    }
+    
+    async function editTinTuc(id) {
+        // Bước 1: Tìm dữ liệu của tin tức đó (có thể lấy từ API để đảm bảo mới nhất)
+        const res = await fetch(`${API_URL}/tintuc`);
+        const data = await res.json();
+        const tin = data.find(item => item.id === id);
+
+        if (tin) {
+            // Bước 2: Đổ dữ liệu vào các ô input trong Form
+            document.getElementById("tinId").value = tin.id;
+            document.getElementById("tieuDe").value = tin.tieuDe;
+            document.getElementById("noiDung").value = tin.noiDung;
+            
+            // Chọn đúng loại tin trong dropdown
+            if (tin.loaiTinTuc) {
+                document.getElementById("selectLoai").value = tin.loaiTinTuc.id;
+            }
+            
+            // Cuộn màn hình lên chỗ form để người dùng thấy
+            window.scrollTo({ top: 500, behavior: 'smooth' });
+        }
+    }
+
+    function resetTinForm() {
+        document.getElementById("tinId").value = "";
+        document.getElementById("tieuDe").value = "";
+        document.getElementById("noiDung").value = "";
+    }
+
+    // Khởi tạo dữ liệu khi load trang
+    window.onload = () => {
+        loadLoai();
+        loadTinTuc();
+    };
+</script>
+
+</body>
+</html>
