@@ -16,4 +16,8 @@ public class SanPhamService {
 	public List<SanPham> getSanPhamsByLoai(Integer loaiId) {
 		return repository.findByLoaiSanPhamId(loaiId);
 	}
+
+	public List<SanPham> getAllSanPham() {
+		return repository.findAll();
+	}
 }

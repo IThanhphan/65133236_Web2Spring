@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lọc Sản Phẩm</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+
+    <h2 class="text-center mb-4">LỌC SẢN PHẨM THEO LOẠI</h2>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form th:action="@{/san-pham/loc-theo-loai}" method="get" class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label for="loaiId" class="col-form-label">Chọn thể loại:</label>
+                </div>
+                <div class="col-auto">
+                    <select name="loaiId" id="loaiId" class="form-select">
+                        <option value="">-- Tất cả sản phẩm --</option>
+                        <option th:each="loai : ${dsLoai}" 
+                                th:value="${loai.id}" 
+                                th:text="${loai.tenLoai}"
+                                th:selected="${loai.id == selectedLoaiId}">
+                        </option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Lọc</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-hover table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Tên sản phẩm</th>
+                <th>Thuộc loại</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="sp : ${dsSanPham}">
+                <td th:text="${sp.id}"></td>
+                <td th:text="${sp.tenSanPham}"></td>
+                <td th:text="${sp.loaiSanPham.tenLoai}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(dsSanPham)}">
+                <td colspan="3" class="text-center text-danger">Không tìm thấy sản phẩm nào cho loại này.</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
