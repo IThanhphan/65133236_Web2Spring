@@ -56,10 +56,10 @@ public class SanPhamViewController {
 		SanPham sp = sanPhamService.getSanPhamById(id);
 
 		if (sp == null) {
-			return "error/404"; // Trả về trang lỗi nếu ID không tồn tại
+			return "error/404";
 		}
 
 		model.addAttribute("sanPham", sp);
-		return "chiTietSanPham"; // Trỏ đến file templates/sanpham/detail.html
+		return "chiTietSanPham";
 	}
 }
