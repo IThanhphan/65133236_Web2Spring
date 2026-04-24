@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -48,5 +49,17 @@ public class SanPhamViewController {
 		model.addAttribute("dsSanPham", dsSanPham);
 
 		return "sanPhamTheoLoai";
+	}
+
+	@GetMapping("/chi-tiet/{id}")
+	public String xemChiTiet(@PathVariable("id") Integer id, Model model) {
+		SanPham sp = sanPhamService.getSanPhamById(id);
+
+		if (sp == null) {
+			return "error/404"; // Trả về trang lỗi nếu ID không tồn tại
+		}
+
+		model.addAttribute("sanPham", sp);
+		return "chiTietSanPham"; // Trỏ đến file templates/sanpham/detail.html
 	}
 }

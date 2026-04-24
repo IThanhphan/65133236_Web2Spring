@@ -1,6 +1,7 @@
 package thigk2.phansithanh.qlsp.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,10 @@ public class SanPhamService {
 
 	public List<SanPham> getAllSanPham() {
 		return repository.findAll();
+	}
+
+	public SanPham getSanPhamById(Integer id) {
+		Optional<SanPham> optional = repository.findById(id);
+		return optional.orElse(null);
 	}
 }
